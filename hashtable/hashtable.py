@@ -32,6 +32,16 @@ class HashTable:
         Implement this, and/or DJB2.
         """
 
+        hval = 0x811c9dc5 # Magic value for 32-bit fnv1 hash initialisation.
+        fnvprime = 0x01000193
+        fnvsize = 2**32
+        if not isinstance(key, bytes):
+            key = key.encode("UTF-8", "ignore")
+        for byte in key:
+            hval = (hval * fnvprime) % fnvsize
+            hval = hval ^ byte
+            return hval
+
     def djb2(self, key):
         """
         DJB2 32-bit hash function
@@ -42,7 +52,7 @@ class HashTable:
         for x in key:
             hash = (hash * 33) + ord(x)
             hash &= 0xffffffff
-            return hash
+        return hash
 
 
     def hash_index(self, key):
@@ -51,6 +61,7 @@ class HashTable:
         between within the storage capacity of the hash table.
         """
         return self.djb2(key) % self.capacity
+        # return self.fnv1(key) % self.capacity
 
     def put(self, key, value):
         """
@@ -105,14 +116,14 @@ class HashTable:
 
 
 if __name__ == "__main__":
-    ht = HashTable(8)
+    ht = HashTable(2)
     print(ht.capacity)
     print(ht.storage)
     # ht.put("line_1", "Tiny hash table")
     ht.put("line_1", "b")
     print(ht.storage)
     print(ht.hash_index("line_1"))
-    ht.put("line_2", "Filled beyond capacity")
+    ht.put("b", "Filled beyond capacity")
     print(ht.storage)
     ht.put("line_3", "Linked list saves the day!")
     print(ht.storage)
