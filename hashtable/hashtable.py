@@ -32,15 +32,7 @@ class HashTable:
         Implement this, and/or DJB2.
         """
 
-        hval = 0x811c9dc5 # Magic value for 32-bit fnv1 hash initialisation.
-        fnvprime = 0x01000193
-        fnvsize = 2**32
-        if not isinstance(key, bytes):
-            key = key.encode("UTF-8", "ignore")
-        for byte in key:
-            hval = (hval * fnvprime) % fnvsize
-            hval = hval ^ byte
-            return hval
+
 
     def djb2(self, key):
         """
