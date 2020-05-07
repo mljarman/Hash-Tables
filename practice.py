@@ -10,8 +10,8 @@ def myhash(s):
     for b in str_bytes:
         total += b
 
-        total &= 0xfffffff # djb2 8 f's
-        total &= 0xffffffffffffffff # fnv-1 16 f's
+        # total &= 0xfffffff # djb2 8 f's
+        # total &= 0xffffffffffffffff # fnv-1 16 f's
 
     return total
 
@@ -40,10 +40,5 @@ if __name__ == "__main__":
     print(hash_index('foobar'))
     print(hash_index('cats'))
     print(hash_index('beej'))
-    print(hash_table)
-    put('hello', 37)# prints 37 at index 4 #hello will always hash to 4 so we
-   # only need hello to find an index position for 37.
-    put('foobar', 126)
-    put('cats', 'dogs')
-
+    print(hash_index('foobaz'))
     print(hash_table)
