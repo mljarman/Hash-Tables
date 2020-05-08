@@ -173,7 +173,6 @@ class HashTable:
         load_factor = self.counter / self.capacity
         # original hashtable
         orig_storage = self.storage
-        # orig_count = self.counter
         if new_capacity is None:
             new_capacity = self.capacity
         temp_hash_table = HashTable(capacity=new_capacity)

@@ -168,7 +168,6 @@ class TestHashTable(unittest.TestCase):
         ht.put("key-9", "val-9")
 
         ht.resize(1024)
-        print(len(ht.storage))
         self.assertTrue(len(ht.storage) == 1024)
 
         return_value = ht.get("key-0")
